@@ -1,0 +1,30 @@
+package com.example.softmedialabtest.model.student.dto;
+
+import com.example.softmedialabtest.model.grade.dto.GradeForStudentDto;
+import com.example.softmedialabtest.model.student.Student;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NonNull;
+
+import java.time.LocalDate;
+
+@Data
+@AllArgsConstructor
+public class ShortStudentDto {
+
+    @NonNull
+    @Size(min = 3, max = 150)
+    private String fullName;
+    @NonNull
+    @Past
+    private LocalDate birthDate;
+    private GradeForStudentDto grade;
+
+
+    public static ShortStudentDto fromStudent(Student student) {
+        return new ShortStudentDto(student.getFullname(), student.getBirthdate(), GradeForStudentDto.fromGrade(student.getGrade()));
+    }
+
+}

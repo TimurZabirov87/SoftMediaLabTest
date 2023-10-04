@@ -1,23 +1,20 @@
 package com.example.softmedialabtest.validation;
 
-import com.example.softmedialabtest.model.grade.StudentGradeEnum;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-import java.util.Arrays;
-import java.util.function.Predicate;
 
-
-public class StudentGradeValidator implements ConstraintValidator<ValidStudentGrade, String> {
+public class StudentGradeValidator implements ConstraintValidator<ValidStudentGrade, Long> {
 
     public void initialize(ValidStudentGrade constraint) {
     }
 
-    public boolean isValid(String value, ConstraintValidatorContext context) {
+    public boolean isValid(Long value, ConstraintValidatorContext context) {
 
-        return Arrays.stream(StudentGradeEnum.values()).toList().stream()
-                .map(StudentGradeEnum::getTranslation)
-                .anyMatch(Predicate.isEqual(value));
+        if (value != null) {
+            return (2 <= value) && (value <= 5);
+        }
+        return true;
 
     }
 }

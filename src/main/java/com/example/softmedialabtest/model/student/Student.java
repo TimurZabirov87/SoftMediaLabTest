@@ -2,7 +2,6 @@ package com.example.softmedialabtest.model.student;
 
 import com.example.softmedialabtest.model.grade.Grade;
 import com.example.softmedialabtest.model.student.dto.NewStudentDto;
-import com.example.softmedialabtest.model.student.dto.UpdateStudentRequest;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -31,7 +30,7 @@ public class Student {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinTable(name = "student_grades",
             joinColumns = {@JoinColumn(name = "student_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "garde_id", referencedColumnName = "id")})
+            inverseJoinColumns = {@JoinColumn(name = "grade_id", referencedColumnName = "id")})
     private Grade grade;
 
     @CreatedDate
@@ -44,26 +43,12 @@ public class Student {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", shape = JsonFormat.Shape.STRING)
     private LocalDateTime updated;
 
-    public static Student fromNewStudentDto(NewStudentDto newStudentDto) {
+    public static Student fromNewStudentDto(NewStudentDto newStudentDto, Grade grade) {
         Student student = new Student();
         student.setFullname(newStudentDto.getFullName());
         student.setBirthdate(newStudentDto.getBirthDate());
-
-        return student;
-    }
-
-    public static Student fromUpdateStudentDto(Long id, UpdateStudentRequest updatedStudent) {
-        Student student = new Student();
-        student.setId(id);
-        student.setFullname(updatedStudent.getFullName());
-        student.setBirthdate(updatedStudent.getBirthDate());
+        student.setGrade(grade);
 
         return student;
     }
 }
-
-/*
-- ФИО
-- дата рождения
-- успеваемость (опционально, значение из справочника)
- */

@@ -7,12 +7,14 @@ import com.example.softmedialabtest.repository.GradesRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Transactional(readOnly = true)
 public class GradeServiceImpl implements GradeService {
 
     private final GradesRepository gradesRepository;
@@ -29,6 +31,7 @@ public class GradeServiceImpl implements GradeService {
     }
 
     @Override
+    @Transactional
     public Grade updateGrade(Long id, UpdateGradeRequest updatedGrade) {
         Grade gradeToUpdate = gradesRepository.findById(id)
                 .orElseThrow(() -> new NoSuchGradeException("Error updating data. Grade with id: " + id + " not found."));
