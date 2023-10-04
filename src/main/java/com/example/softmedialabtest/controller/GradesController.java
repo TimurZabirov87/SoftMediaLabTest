@@ -33,11 +33,9 @@ public class GradesController {
     public List<GradeDto> getAllGrades() {
         log.info("Получен get запрос к эндпоинту: /grades");
 
-        List<GradeDto> grades = gradeService.findAll().stream()
+        return gradeService.findAll().stream()
                 .map(GradeDto::fromGrade)
                 .collect(Collectors.toList());
-
-        return grades;
     }
 
     /**

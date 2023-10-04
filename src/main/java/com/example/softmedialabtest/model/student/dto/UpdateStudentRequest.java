@@ -1,10 +1,10 @@
 package com.example.softmedialabtest.model.student.dto;
 
+import com.example.softmedialabtest.validation.ValidStudentGrade;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NonNull;
 
 import java.time.LocalDate;
 
@@ -12,9 +12,9 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class UpdateStudentRequest {
     @Size(min = 3, max = 150)
-    @NonNull
     private String fullName;
     @Past
-    @NonNull
     private LocalDate birthDate;
+    @ValidStudentGrade
+    private Long gradeId;
 }

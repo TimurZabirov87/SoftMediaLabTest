@@ -11,7 +11,7 @@ import java.lang.annotation.*;
 @Documented
 public @interface ValidStudentGrade {
 
-    String message() default "Text is invalid: cannot be empty or blank";
+    String message() default "gradeId is invalid: should be 2 <= grade <= 5";
 
     Class<?>[] groups() default { };
 

@@ -3,6 +3,8 @@ package com.example.softmedialabtest.model.grade;
 import com.example.softmedialabtest.model.student.Student;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -16,7 +18,8 @@ import java.util.List;
 @Data
 public class Grade {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Min(2)
+    @Max(5)
     private Long id;
 
     @OneToMany(mappedBy = "grade", fetch = FetchType.LAZY)
