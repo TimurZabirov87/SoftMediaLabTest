@@ -1,4 +1,4 @@
-package com.example.softmedialabtest;
+package example.softmedialabtest;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
