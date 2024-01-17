@@ -13,3 +13,5 @@ docker-compose -f docker-compose-db.yml up -d
 
 
 * Пути к документации Swagger указаны в application.properties
+
+* При запуске тестов запускается PostgreSQL в Docker с помощью testcontainers. Поэтому в этот момент должен быть включен любой Docker Daemon.
